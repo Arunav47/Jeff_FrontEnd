@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../../services/gemini_services.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -8,6 +11,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  late String quote;
+  GeminiServices geminiServices = GeminiServices();
+  @override
+  void initState() async{
+    quote = await geminiServices.getQuote(context, FirebaseAuth.instance.currentUser!.uid);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

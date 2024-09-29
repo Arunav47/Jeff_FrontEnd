@@ -2,9 +2,13 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter/material.dart';
+import 'package:mental_health_support_chatbot/pages/chatbot/end_mood.dart';
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({super.key});
+  final String mood;
+  const ChatPage({
+    required this.mood,
+    super.key});
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -12,7 +16,6 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   List<ChatMessage> messages = [];
-  // final TextEditingController _controller = TextEditingController();
   final String apiUrl = "https://778c-104-28-248-200.ngrok-free.app/chat";
   ChatUser chatUser = ChatUser(id: "0", firstName: "User");
   ChatUser geminiUser = ChatUser(id: "1", firstName: "Jeff");
@@ -22,6 +25,13 @@ class _ChatPageState extends State<ChatPage> {
       appBar: AppBar(
         title: const Text("ChatBot"),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>EndMood(mood: widget.mood,)));
+            }, 
+            icon: const Icon(Icons.close),)
+        ],
       ),
       body: _buildUI(),
     );
@@ -44,7 +54,6 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Future<void> _sendMessage(String message) async {
-    // Add the user's message to the chat
     final userMessage = ChatMessage(
       text: message,
       user: chatUser,
@@ -55,7 +64,6 @@ class _ChatPageState extends State<ChatPage> {
     });
 
     try {
-      // Prepare the API request
       final http.Response response = await http.post(
         Uri.parse(apiUrl),
         headers: {
@@ -67,8 +75,6 @@ class _ChatPageState extends State<ChatPage> {
       if (response.statusCode == 200) {
         final responseBody = jsonDecode(response.body);
         final chatbotReply = responseBody['reply'] ?? "No reply from the chatbot.";
-
-        // Add the chatbot's response to the chat
         final botMessage = ChatMessage(
           text: chatbotReply,
           user: geminiUser,
@@ -79,7 +85,6 @@ class _ChatPageState extends State<ChatPage> {
           messages.insert(0, botMessage);
         });
       } else {
-        // Handle the error response from the API
         setState(() {
           messages.insert(0, ChatMessage(
             text: "Failed to get a response from Jeff. Please try again later.",
@@ -89,7 +94,6 @@ class _ChatPageState extends State<ChatPage> {
         });
       }
     } catch (error) {
-      // Handle any other errors (like network issues)
       setState(() {
         messages.insert(0, ChatMessage(
           text: "An error occurred: $error",
