@@ -15,7 +15,11 @@ class _JournalPageState extends State<JournalPage> {
         title: const Text("Journal"),
         centerTitle: true,
       ),
-      body: Container(),
+      body: Container(
+        child: const Center(
+          child: 
+        ),
+      ),
     );
   }
 }

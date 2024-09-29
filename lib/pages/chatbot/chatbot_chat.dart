@@ -12,7 +12,7 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   List<ChatMessage> messages = [];
-  final TextEditingController _controller = TextEditingController();
+  // final TextEditingController _controller = TextEditingController();
   final String apiUrl = "https://778c-104-28-248-200.ngrok-free.app/chat";
   ChatUser chatUser = ChatUser(id: "0", firstName: "User");
   ChatUser geminiUser = ChatUser(id: "1", firstName: "Jeff");
@@ -20,7 +20,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("ChatBot"),
+        title: const Text("ChatBot"),
         centerTitle: true,
       ),
       body: _buildUI(),

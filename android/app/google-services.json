@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "317196597529",
+    "project_id": "jeff-mental-health-chatbot",
+    "storage_bucket": "jeff-mental-health-chatbot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:317196597529:android:3017471c2ab52c43a9ed88",
+        "android_client_info": {
+          "package_name": "com.example.mental_health_support_chatbot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3wJyM5j2sFzsUu4UQaAvyr1mSYxQqLKw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

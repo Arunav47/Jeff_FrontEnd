@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mental_health_support_chatbot/chatbot/chatbot_chat.dart';
-import 'package:mental_health_support_chatbot/homepage/home.dart';
-import 'package:mental_health_support_chatbot/profile/profile.dart';
+import 'package:mental_health_support_chatbot/pages/chatbot/chatbot_chat.dart';
+import 'package:mental_health_support_chatbot/pages/homepage/home.dart';
+import 'package:mental_health_support_chatbot/pages/profile/profile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
+  static const String routeName = "/homepage";
+
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+
   List<Widget> pages = [
     const Home(),
     const ChatPage(),

@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+  static const String routeName = "/loginPage";
+  
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -10,12 +13,31 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late TextEditingController emailController;
   late TextEditingController passController;
+  final _formKey = GlobalKey<FormState>();
+
 
   @override
   void initState() {
     emailController = TextEditingController();
     passController = TextEditingController();
     super.initState();
+  }
+  @override
+  void dispose() {
+    emailController.dispose();
+    passController.dispose();
+    super.dispose();
+  }
+
+  final _auth = FirebaseAuth.instance;
+
+  void login(){
+    _auth.signInWithEmailAndPassword(email: emailController.text, password: passController.text).then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Login Successful")));
+      Navigator.popAndPushNamed(context, '/homepage');
+    }).onError((handleError, stackTrace) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Password is too weak")));
+    });
   }
 
 
@@ -36,6 +58,7 @@ class _LoginPageState extends State<LoginPage> {
             height: screenHeight*0.02,
           ),
           Form(
+            key: _formKey,
             child: Container(
               margin: const EdgeInsets.all(15),
               child: Column(
@@ -47,6 +70,12 @@ class _LoginPageState extends State<LoginPage> {
                     border: OutlineInputBorder(),
                     labelText: "Email",
                   ),
+                  validator: (value) {
+                      if(value == null || value.isEmpty){
+                        return "Password cannot be empty";
+                      }
+                      return null;
+                    },
                 ),
                 SizedBox(height: screenHeight * 0.05,),
                 TextFormField(
@@ -59,12 +88,22 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: (){},  
                     )
                   ),
+                  validator: (value) {
+                      if(value == null || value.isEmpty){
+                        return "Password cannot be empty";
+                      }
+                      return null;
+                    },
                   obscureText: true,
                 ),
                 SizedBox(height: screenHeight * 0.05,),
                 ElevatedButton(
                   style: Theme.of(context).elevatedButtonTheme.style?.copyWith(minimumSize: WidgetStatePropertyAll(Size(screenWidth*0.6, screenHeight*0.05))),
-                  onPressed: (){}, 
+                  onPressed: (){
+                    if(_formKey.currentState!.validate()){
+                      login();
+                    }
+                  }, 
                   child: const Text("Login"),
                 )
               ],
@@ -75,8 +114,10 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Dont have an account?"),
-              TextButton(onPressed: (){}, child: Text("SignUp"))
+              const Text("Dont have an account?"),
+              TextButton(onPressed: (){
+                  Navigator.popAndPushNamed(context, "/signUpPage");
+              }, child: const Text("SignUp"))
             ],
           )
         ],
