@@ -1,28 +1,29 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mental_health_support_chatbot/models/journal_model.dart';
 
 class JournalService {
-
-  static String _baseUrl = "/notes"; // base Url to be added
+  static String baseUrl = dotenv.env['BASE_URL']!;
+  static String apiUrl = "$baseUrl/Journals";
 
   static Future<void> addJournal(Journal journal) async {
-    Uri requestUri = Uri.parse(_baseUrl + "/add");
+    Uri requestUri = Uri.parse("$apiUrl/add");
     var response = await http.post(requestUri, body: journal.toMap());
     var decoded = jsonDecode(response.body);
     log(decoded.toString());
   }
   
   static Future<void> deleteJournal(Journal journal) async {
-    Uri requestUri = Uri.parse(_baseUrl + "/delete");
+    Uri requestUri = Uri.parse("$apiUrl/delete");
     var response = await http.post(requestUri, body: journal.toMap());
     var decoded = jsonDecode(response.body);
     log(decoded.toString());
   }
 
   static Future<List<Journal>> fetchJournal(String userId) async {
-    Uri requestUri = Uri.parse(_baseUrl + "/list");
+    Uri requestUri = Uri.parse("$apiUrl/list");
     var response = await http.post(requestUri, body: { "userId": userId });
     var decoded = jsonDecode(response.body);
     

@@ -1,18 +1,18 @@
 import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 
-const apiUrl = 'GEMINI_API_URL';
+String baseUrl = dotenv.env['BASE_URL']!;
+
 
 class GeminiServices{
   Future<void> sendMood(BuildContext context, String mood, bool feelingBetter) async {
       try {
         final http.Response response = await http.post(
-          Uri.parse(apiUrl),
+          Uri.parse("$baseUrl/Analytics/add"),
           headers: {
             'Content-Type': 'application/json; charset=UTF-8'
           },
@@ -37,7 +37,7 @@ class GeminiServices{
   Future<String> getPreviousMood(BuildContext context, String userId) async{
     try{
       final http.Response response = await http.post(
-        Uri.parse(apiUrl),
+        Uri.parse("$baseUrl/Analytics/previous_mood"),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -63,7 +63,7 @@ class GeminiServices{
     String mood = await getPreviousMood(context, userId);
     try{
       final http.Response response = await http.post(
-        Uri.parse(apiUrl),
+        Uri.parse("$baseUrl/Gemini/mood"),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -84,6 +84,4 @@ class GeminiServices{
       return "Something went wrong";
     }
   }
-
-
 }

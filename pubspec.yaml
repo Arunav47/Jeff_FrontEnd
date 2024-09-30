@@ -50,6 +50,9 @@ dependencies:
   firebase_storage: ^12.3.1
   cloud_firestore: ^5.4.2
   provider: ^6.1.2
+  fl_chart: ^0.69.0
+  flutter_dotenv: ^5.1.0
+  carousel_slider: ^5.0.0
 
 dev_dependencies:
   flutter_test:

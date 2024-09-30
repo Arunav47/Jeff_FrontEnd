@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,8 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   List<ChatMessage> messages = [];
-  final String apiUrl = "https://778c-104-28-248-200.ngrok-free.app/chat";
+  static String baseUrl = dotenv.env['BASE_URL']!;
+  final String apiUrl = "$baseUrl/Gemini/chat";
   ChatUser chatUser = ChatUser(id: "0", firstName: "User");
   ChatUser geminiUser = ChatUser(id: "1", firstName: "Jeff");
   @override
