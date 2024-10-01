@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mental_health_support_chatbot/models/journal_model.dart';
+import 'package:mental_health_support_chatbot/pages/homepage/homepage.dart';
 import 'package:mental_health_support_chatbot/providers/journal_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +32,7 @@ class _JournalPageState extends State<JournalPage> {
       dateAdded: DateTime.now()
     );
     Provider.of<JournalProvider>(context, listen: false).addJournal(newJournal);
-    Navigator.pop(context);
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomePage()));
   }
 
   void updateNote() {
@@ -54,67 +55,68 @@ class _JournalPageState extends State<JournalPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-
-          IconButton(
-            onPressed: () {
-              if(widget.isUpdate) {
-                updateNote();
-              }
-              else {
-                addNewNote();
-              }
-            },
-            icon: const Icon(Icons.check),
-          ),
-
-        ],
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 10
-          ),
-          child: Column(
-            children: [
-
-              TextField(
-                controller: titleController,
-                autofocus: (widget.isUpdate == true) ? false : true,
-                onSubmitted: (val) {
-                  if(val != "") {
-                    noteFocus.requestFocus();
-                  }
-                },
-                style: const TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold
-                ),
-                decoration: const InputDecoration(
-                  hintText: "Title",
-                  border: InputBorder.none
-                ),
-              ),
-
-              Expanded(
-                child: TextField(
-                  controller: contentController,
-                  focusNode: noteFocus,
-                  maxLines: null,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed: () {
+                if(widget.isUpdate) {
+                  updateNote();
+                }
+                else {
+                  addNewNote();
+                }
+              },
+              icon: const Icon(Icons.check),
+            ),
+      
+          ],
+        ),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 10
+            ),
+            child: Column(
+              children: [
+      
+                TextField(
+                  controller: titleController,
+                  autofocus: (widget.isUpdate == true) ? false : true,
+                  onSubmitted: (val) {
+                    if(val != "") {
+                      noteFocus.requestFocus();
+                    }
+                  },
                   style: const TextStyle(
-                    fontSize: 20
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold
                   ),
                   decoration: const InputDecoration(
-                    hintText: "Note",
+                    hintText: "Title",
                     border: InputBorder.none
                   ),
                 ),
-              ),
-
-            ],
+      
+                Expanded(
+                  child: TextField(
+                    controller: contentController,
+                    focusNode: noteFocus,
+                    maxLines: null,
+                    style: const TextStyle(
+                      fontSize: 20
+                    ),
+                    decoration: const InputDecoration(
+                      hintText: "Note",
+                      border: InputBorder.none
+                    ),
+                  ),
+                ),
+      
+              ],
+            ),
           ),
         ),
       ),

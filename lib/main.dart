@@ -9,10 +9,10 @@ import 'package:provider/provider.dart';
 import 'providers/journal_provider.dart';
 import 'utils/theme/theme.dart';
 
-void main() async{
+Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: "../.env");
   await Firebase.initializeApp();
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 

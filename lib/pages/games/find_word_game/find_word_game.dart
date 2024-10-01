@@ -121,7 +121,7 @@ class _WordPuzzleWidgetState extends State<WordPuzzleWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 InkWell(
-                  onTap: () => hintGenerator(),
+                  onTap: () => Navigator.pop(context),
                   child: Icon(
                     Icons.healing_outlined,
                     size: 45,
@@ -234,12 +234,12 @@ class _WordPuzzleWidgetState extends State<WordPuzzleWidget> {
             ),
           ),
           Container(
-            padding: const EdgeInsets.all(5),
+            // padding: const EdgeInsets.all(2),
             alignment: Alignment.center,
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 1,
-                crossAxisCount: 8,
+                childAspectRatio: 1.5,
+                crossAxisCount: 4,
                 crossAxisSpacing: 4,
                 mainAxisSpacing: 4,
               ),
@@ -265,7 +265,7 @@ class _WordPuzzleWidgetState extends State<WordPuzzleWidget> {
                         child: Text(
                           "${currentQuestion.arrayBtns?[index]}".toUpperCase(),
                           style: const TextStyle(
-                            fontSize: 12,
+                            fontSize: 10,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
