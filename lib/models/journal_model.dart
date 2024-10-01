@@ -1,28 +1,28 @@
 class Journal{
   String? id;
-  String? userId;
+  String? userid;
   String? title;
   String? content;
-  DateTime? dateAdded;
+  DateTime? dateadded;
 
-  Journal({this.id, this.userId, this.title, this.content, this.dateAdded});
+  Journal({this.id, this.userid, this.title, this.content, this.dateadded});
 
   factory Journal.fromMap(Map<String, dynamic> map) {
     return Journal(
       id : map['id'],
-      userId : map['userId'],
+      userid : map['userid'],
       title : map['title'],
       content : map['content'],
-      dateAdded : DateTime.tryParse(map['dateAdded'])
+      dateadded : DateTime.tryParse(map['dateadded'])
     );
   }
   Map<String, dynamic> toMap() {
     return {
       'id' : id,
-      'userId' : userId,
+      'userid' : userid,
       'title' : title,
       'content' : content,
-      'dateAdded' : dateAdded!.toIso8601String()
+      'dateadded' : dateadded!.toIso8601String()
     };
   }
 }

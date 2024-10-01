@@ -25,7 +25,6 @@ class _JournalDetailsState extends State<JournalDetails> {
         body: (journalProvider.isLoading == false) ? SafeArea(
           child: (journalProvider.journals.length > 0) ? ListView(
             children: [
-      
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(

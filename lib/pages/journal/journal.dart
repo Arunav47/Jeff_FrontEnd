@@ -26,10 +26,10 @@ class _JournalPageState extends State<JournalPage> {
   void addNewNote() {
     Journal newJournal = Journal(
       id: DateTime.now().microsecondsSinceEpoch.toString(),
-      userId: FirebaseAuth.instance.currentUser!.uid,
+      userid: FirebaseAuth.instance.currentUser!.uid,
       title: titleController.text,
       content: contentController.text,
-      dateAdded: DateTime.now()
+      dateadded: DateTime.now()
     );
     Provider.of<JournalProvider>(context, listen: false).addJournal(newJournal);
     Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomePage()));
@@ -38,7 +38,7 @@ class _JournalPageState extends State<JournalPage> {
   void updateNote() {
     widget.journal!.title = titleController.text;
     widget.journal!.content = contentController.text;
-    widget.journal!.dateAdded = DateTime.now();
+    widget.journal!.dateadded = DateTime.now();
     Provider.of<JournalProvider>(context, listen: false).updateJournal(widget.journal!);
     Navigator.pop(context);
   }

@@ -15,7 +15,7 @@ class JournalProvider with ChangeNotifier {
 
 
   void sortNotes() {
-    journals.sort((a, b) => b.dateAdded!.compareTo(a.dateAdded!));
+    journals.sort((a, b) => b.dateadded!.compareTo(a.dateadded!));
   }
 
   List<Journal> filter(String filterQuery) {

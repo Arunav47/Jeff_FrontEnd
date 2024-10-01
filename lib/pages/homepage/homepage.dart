@@ -7,7 +7,6 @@ import 'package:mental_health_support_chatbot/pages/chatbot/feeling_assesment.da
 import 'package:mental_health_support_chatbot/pages/homepage/home.dart';
 import 'package:mental_health_support_chatbot/pages/journal/journal_list.dart';
 import 'package:mental_health_support_chatbot/pages/profile/analytics.dart';
-import 'package:mental_health_support_chatbot/pages/profile/profile.dart';
 import 'package:mental_health_support_chatbot/services/gemini_services.dart';
 
 class HomePage extends StatefulWidget {
