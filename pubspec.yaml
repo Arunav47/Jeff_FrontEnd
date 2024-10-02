@@ -53,6 +53,7 @@ dependencies:
   fl_chart: ^0.69.0
   flutter_dotenv: ^5.1.0
   carousel_slider: ^5.0.0
+  flutter_native_splash: ^2.4.1
 
 dev_dependencies:
   flutter_test:
@@ -84,7 +85,7 @@ flutter:
     - assets/images/night.png
     - assets/images/puzzlegame1.jpg
     - assets/images/puzzlegame2.jpg
-    - assets/images/logo.jpeg
+    - assets/images/logo.png
 
 
   #   - images/a_dot_burr.jpeg

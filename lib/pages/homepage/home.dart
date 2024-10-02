@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
                 Container(
                   padding: const EdgeInsets.all(5),
                   alignment: Alignment.centerLeft,
-                  child: Text('Good Morning', style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),)
+                  child: Text('Good Afternoon', style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),)
                 ),
                 SizedBox(width: 10,),
                 Image(image: AssetImage('assets/images/daytime.png'), height: 40, width: 40,)

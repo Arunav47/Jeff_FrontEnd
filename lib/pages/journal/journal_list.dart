@@ -23,7 +23,7 @@ class _JournalDetailsState extends State<JournalDetails> {
           centerTitle: true,
         ),
         body: (journalProvider.isLoading == false) ? SafeArea(
-          child: (journalProvider.journals.length > 0) ? ListView(
+          child: (journalProvider.journals.isNotEmpty) ? ListView(
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -33,14 +33,14 @@ class _JournalDetailsState extends State<JournalDetails> {
                       filteredQuery = val;
                     });
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Search"
                   ),
                 ),
               ),
       
-              (journalProvider.filter(filteredQuery).length > 0) ? GridView.builder(
-                physics: NeverScrollableScrollPhysics(),
+              (journalProvider.filter(filteredQuery).isNotEmpty) ? GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2
@@ -84,15 +84,15 @@ class _JournalDetailsState extends State<JournalDetails> {
                   );
       
                 },
-              ) : Padding(
+              ) : const Padding(
                 padding: EdgeInsets.all(20),
                 child: Text("No journal found!", textAlign: TextAlign.center,),
               ),
             ],
-          ) : Center(
+          ) : const Center(
             child: Text("No journal yet"),
           ),
-        ) : Center(
+        ) : const Center(
           child: CircularProgressIndicator(),
         ),      
         floatingActionButton: FloatingActionButton(

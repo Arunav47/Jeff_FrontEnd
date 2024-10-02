@@ -24,7 +24,7 @@ class JournalService {
 
   static Future<List<Journal>> fetchJournal(String userId) async {
     Uri requestUri = Uri.parse("$apiUrl/list");
-    var response = await http.post(requestUri, body: { "userId": userId });
+    var response = await http.post(requestUri, body: { "userid": userId });
     var decoded = jsonDecode(response.body);
     
     List<Journal> journals = [];
@@ -32,7 +32,6 @@ class JournalService {
       Journal newJournal = Journal.fromMap(journalsMap);
       journals.add(newJournal);
     }
-
     return journals;
   }
 
