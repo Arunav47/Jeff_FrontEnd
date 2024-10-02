@@ -63,7 +63,7 @@ class _MyAppState extends State<MyApp> {
           HomePage.routeName: (context) => const HomePage(),
           SplashScreen.routeName: (context) => const SplashScreen(),
         },
-        initialRoute: (user == null)? LoginPage.routeName : HomePage.routeName,
+        initialRoute: SplashScreen.routeName,
         debugShowCheckedModeBanner: false,
       ),
     );

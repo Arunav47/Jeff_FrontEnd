@@ -25,6 +25,12 @@ class MoodPieChart extends StatelessWidget {
             radius: 100,
           ),
           PieChartSectionData(
+            value: moodData.calm,
+            color: const Color.fromARGB(255, 9, 218, 207),
+            title: 'Calm',
+            radius: 100,
+          ),
+          PieChartSectionData(
             value: moodData.fear,
             color: Colors.purple,
             title: 'Fear',

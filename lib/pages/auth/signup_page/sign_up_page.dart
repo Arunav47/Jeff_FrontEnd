@@ -17,6 +17,7 @@ class _SignUpPageState extends State<SignUpPage> {
   late TextEditingController passController; 
   late TextEditingController userNameController; 
   final _formKey = GlobalKey<FormState>();
+  bool _visibility = true;
 
   
   @override
@@ -72,7 +73,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Container(
             margin: const EdgeInsets.symmetric(horizontal: 15),
             alignment: Alignment.centerLeft,
-            child: Text("Login", style: Theme.of(context).textTheme.headlineLarge,)
+            child: Text("Sign Up", style: Theme.of(context).textTheme.headlineLarge,)
           ),
           SizedBox(
             height: screenHeight*0.02,
@@ -117,8 +118,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       border: const OutlineInputBorder(),
                       labelText: "Password",
                       suffixIcon: IconButton(
-                        icon: const Icon(Icons.visibility),
-                        onPressed: (){},  
+                        icon: (_visibility)? const Icon(Icons.visibility): const Icon(Icons.visibility_off),
+                        onPressed: (){
+                          setState(() {
+                            _visibility = !_visibility;
+                          });
+                        },  
                       )
                     ),
                     validator: (value) {
@@ -127,7 +132,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       }
                       return null;
                     },
-                    obscureText: true,
+                    obscureText: _visibility,
                   ),
                     SizedBox(height: screenHeight * 0.05,),
                     ElevatedButton(

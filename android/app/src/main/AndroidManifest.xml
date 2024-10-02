@@ -7,9 +7,9 @@
          </intent>
      </queries>
     <application
-        android:label="mental_health_support_chatbot"
+        android:label="Jeff EI"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

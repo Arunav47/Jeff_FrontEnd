@@ -14,6 +14,7 @@ class _LoginPageState extends State<LoginPage> {
   late TextEditingController emailController;
   late TextEditingController passController;
   final _formKey = GlobalKey<FormState>();
+  bool _visibility = true;
 
 
   @override
@@ -36,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Login Successful")));
       Navigator.popAndPushNamed(context, '/homepage');
     }).onError((handleError, stackTrace) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Password is too weak")));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Incorrect Password or Email")));
     });
   }
 
@@ -84,8 +85,12 @@ class _LoginPageState extends State<LoginPage> {
                     border: const OutlineInputBorder(),
                     labelText: "Password",
                     suffixIcon: IconButton(
-                      icon: const Icon(Icons.visibility),
-                      onPressed: (){},  
+                      icon: (_visibility)? const Icon(Icons.visibility): const Icon(Icons.visibility_off),
+                      onPressed: (){
+                        setState(() {
+                          _visibility = !_visibility;
+                        });
+                      },  
                     )
                   ),
                   validator: (value) {
@@ -94,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                       }
                       return null;
                     },
-                  obscureText: true,
+                  obscureText: _visibility,
                 ),
                 SizedBox(height: screenHeight * 0.05,),
                 ElevatedButton(

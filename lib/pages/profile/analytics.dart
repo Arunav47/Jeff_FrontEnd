@@ -37,6 +37,15 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
         appBar: AppBar(
           title: const Text('Profile', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
           centerTitle: true,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.popAndPushNamed(context, '/loginPage');
+              },
+            ),
+          ],
         ),
         body: Container(
           padding: const EdgeInsets.all(16.0),
@@ -87,7 +96,15 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                     } else if (snapshot.hasError) {
                       return Center(child: Text('Error: ${snapshot.error}'));
                     } else {
-                      return Container(
+                      return 
+                      (
+                        snapshot.data!.anger == 0 && snapshot.data!.happy == 0 && snapshot.data!.fear == 0 && snapshot.data!.anxiety == 0 && snapshot.data!.sadness == 0 && snapshot.data!.boredom == 0 && snapshot.data!.excitement == 0 && snapshot.data!.calm == 0)? 
+                        Container(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text("No data available", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                        ) 
+                      :
+                       Container(
                         padding: const EdgeInsets.all(16.0),
                         child: MoodPieChart(moodData: snapshot.data!),
                       );
@@ -108,10 +125,17 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                     } else if (snapshot.hasError) {
                       return Center(child: Text('Error: ${snapshot.error}'));
                     } else {
-                      return Container(
+                      return 
+                      (snapshot.data!.percentageBetter == 0 && snapshot.data!.percentageNotBetter == 0)?
+                        Container(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text("No data available", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                        )
+                        :
+                        Container(
                         padding: const EdgeInsets.all(16.0),
                         child: FeedbackBarChart(feedbackData: snapshot.data!),
-                      );
+                        );
                     }
                   },
                 ),
@@ -130,6 +154,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
     );
 
     if (response.statusCode == 200) {
+      // print(response.body);
       return FeedbackPercentage.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load feedback percentage');
@@ -143,6 +168,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
     );
 
     if (response.statusCode == 200) {
+      // print(response.body);
       return MoodDistribution.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load mood distribution');

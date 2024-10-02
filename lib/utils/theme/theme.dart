@@ -19,14 +19,15 @@ class TrendyTheme{
   );
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
-    brightness: Brightness.dark,
+    brightness: Brightness.light,
     primaryColor: Colors.indigoAccent,
-    scaffoldBackgroundColor: Colors.white,
-    textTheme: TrendyTextTheme.darkTextTheme,
-    elevatedButtonTheme: TrendyElevatedButtonTheme.darkElevatedButtonTheme,
-    appBarTheme: TrendyAppBarTheme.darkAppBarTheme,
-    bottomSheetTheme: TrendyBottomSheetTheme.darkBottomSheetTheme,
-    outlinedButtonTheme: TrendyOutlinedButtonTheme.darkOutlinedButtonTheme,
-    checkboxTheme: TrendyCheckboxTheme.darkCheckboxTheme,
+    scaffoldBackgroundColor: const Color(0xFFFFE4FA),
+    textTheme: TrendyTextTheme.lightTextTheme,
+    elevatedButtonTheme: TrendyElevatedButtonTheme.lightElevatedButtonTheme,
+    appBarTheme: TrendyAppBarTheme.lightAppBarTheme,
+    bottomNavigationBarTheme: TrendyBottomNavigationBarTheme.lightBottomNavigationBarTheme,
+    bottomSheetTheme: TrendyBottomSheetTheme.lightBottomSheetTheme,
+    outlinedButtonTheme: TrendyOutlinedButtonTheme.lightOutlinedButtonTheme,
+    checkboxTheme: TrendyCheckboxTheme.lightCheckboxTheme,
   );
 }

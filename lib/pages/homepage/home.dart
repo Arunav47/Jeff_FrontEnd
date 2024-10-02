@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
       final responseBody = jsonDecode(response.body);
       return GetQuote.fromJson(responseBody);
     } else {
-      throw Exception('Failed to load quote');
+      throw "Something went wrong";
     }
   }
 
