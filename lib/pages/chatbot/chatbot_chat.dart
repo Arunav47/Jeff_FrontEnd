@@ -3,6 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mental_health_support_chatbot/pages/chatbot/end_mood.dart';
 
 class ChatPage extends StatefulWidget {
@@ -71,7 +72,7 @@ class _ChatPageState extends State<ChatPage> {
         headers: {
           'Content-Type': 'application/json; charset=UTF-8'
         },
-        body: jsonEncode({'message': message}),
+        body: jsonEncode({'message': message, 'userid': FirebaseAuth.instance.currentUser!.uid}),
       );
 
       if (response.statusCode == 200) {
